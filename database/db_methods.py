@@ -6,6 +6,7 @@ def addAttribute(self,Data):
     else:
         self.myclass.__dict__[self.name] = Attibute(self.name)
         self.myclass.attributes.append(self.name)
+        #print(self.myclass.attributes)
         if len(Data) != 0:
             self.myclass.__dict__[self.name].Import(Data)
     return self.myclass.__dict__[self.name]
@@ -39,6 +40,8 @@ def ShortCut(self, Glob=globals(), On=True, Case=0):
     """
     if Case == 0:
         # print(globals())
+        print("Case 0 is selected")
+        print(self.myclass.attributes)
         for att in self.myclass.__use_sel_att__():
             Glob[att] = self.myclass.__dict__[att].Return()
             print(att, " Exported")
