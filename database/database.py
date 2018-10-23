@@ -12,7 +12,14 @@ import db_methods as dbm
 from matplotlib import pyplot as plt
 
 class database:
-	__Class__=None
+#	__Class__=self.__class__
+	__myclass__=[]
+	def __last_myclass_(self):
+		if len(database.__myclass__)==1:
+			return database.__myclass__[0]
+		elif len(database.__myclass__)>1:
+			return database.__myclass__[-1]
+		pass
 
 	def __init__(self):
 		self.name = "omari"
@@ -24,14 +31,40 @@ class database:
 		#
 		self.__functions__={}
 		self.__method_att__=[]
-		#self.n=0
+		self.n=0
 
-		self.__call__();self.Attribute();self.Attribute().myclass=self
+		self.__export_self_to_main_class__()
+#		self.__call__();self.Attribute();
+#        self.Attribute().myclass=self
+
+		self.Attribute = __attribute_method__(Class=self)
+		self.Process   = __process_method__(self)
+		self.Operation = __operation_method__(self)
+		self.Method    = __method_method__(self)
+
+
+
+	def __export_self_to_main_class__(self):
+		database.__myclass__.append(self)
+
 	def __call__(self):
-		database.__Class__=self;print(self.attributes)
+		#database.__Class__=self;
+		#print(self.attributes)
 		#print(__main__.globals())
 		#return self
+		self.n+=1
+		print("wth")
 		pass
+	'''
+	def attribute(self):
+		return __attribute_method__(Class=self)
+		pass
+
+	def process(self):
+		return __process_method__(self)
+		pass
+	'''
+	'''
 	def __getattribute__(self, item):
 		database.__Class__ = self;
 		print(self.attributes)
@@ -46,19 +79,156 @@ class database:
 
 
 	def __repr__(self):
- 		self.__call__()
+		self.__call__()
 		return 	"""
         Name of the database %s 
         Number of Attributes %i
         Number of Methods %i"""%(
 				self.name,len(self.attributes),len(self.__method_att__))
-		
+	'''
+
+
+# ================================================================================
+class __process_method__:
+	def __init__(self,Class):
+		self.myclass=Class
+		self.__call__()
+		pass
+	def __call__(self, *args, **kwargs):
+		#database.__Class__=self
+		pass
+
+	def Filter(self,Condition,AttibuteName=""):
+		I = self.myclass.__dict__[AttibuteName].Filter(Condition).__index__
+		self.Slice(I)
+		return self.myclass
+
+	#@classmethod
+	def Slice(self,I=[]):
+		for att in self.myclass.__use_sel_att__():
+			self.myclass.__dict__[att].Slice(I)
+		return self.myclass
+
+# ================================================================================
+class __method_method__:
+	"""
+
+	"""
+	def __init__(self,Class):
+		self.myclass=Class
+		pass
+
+	def Function(self,Function):
+		#print(dir(Function))
+		self.function=Function
+		self.name = Function.__name__
+		#self.myclass=database.__myclass__[-1]#database.__Class__
+		return self
+		pass
+
+	@property
+	def Add(self):
+		return dbm.addMethod(self)
+		pass
+
+	@property
+	def Delete(self):
+		dbm.deleteMethod(self)
+		pass
+
+
+	def Select(self,*args,**kwargs):
+		pass
+
+	def Execute(self):
+		pass
+
+	pass
+# ================================================================================
+class __operation_method__:
+	__Class__=None
+	def __init__(self,Class):
+		self.myclass=Class#database.__myclass__[-1]#database.__Class__
+		self.__call__()
+		pass
+	def __call__(self, *args, **kwargs):
+		#		Operation.__Class__=self
+		pass
+
+	def Table(self):
+		pass
+
+	class Export:
+		def __init__(self):
+			self.myclass=database.__myclass__[-1]#database.__Class__
+			pass
+		def ToList(self):
+			return [self.myclass.__dict__[att].Return() for att in self.myyclass.__use_sel_att__()]
+
+	class Import:
+		pass
+
+	class Share:
+		pass
+# ================================================================================
+class __attribute_method__:
+	def __init__(self,Class):
+		self.name = None
+		self.myclass = Class;  # __myclass__[-1]#database.__Class__
+
+	def __call__(self):
+		self.myclass = database.__Class__
+
+	def Create(self, *args):
+		pass
+
+	def Add(self, Data=[]):
+		return dbm.addAttribute(self, Data)
+
+	def List(self):
+		pass
+
+	def Delete(self):
+		dbm.deleteAttribute(self)
+		pass
+
+	def Import(self, Data):
+		pass
+
+	def Update(self):
+		pass
+
+	def Save(self):
+		for att in self.myclass.__use_sel_att__():
+			self.myclass.__dict__[att].update()
+
+	def Reset(self):
+		if self.name in database.__Class__.__dict__.keys():
+			database.__Class__.__dict__[self.name].Reset()
+			pass
+
+	def Select(self, *argu, **kwargs):
+		return dbm.SelectAttributes(self, argu, kwargs)
+		pass
+
+	def ShortCut(self, Glob=globals(), On=True, Case=0):
+		# self.__call__()
+		print(self.myclass.attributes)
+		"""
+			Export the class variables to the globals valible
+			Case 0    : list
+			Case 1    : Class (Attribue)
+			otherwise : Str
+		"""
+		dbm.ShortCut(self, Glob, On, Case)
+		pass
 
 	# ----------------------------------------------------------------------------------------
+'''
 	class Attribute:
 		def __init__(self,Name=""):
 			self.name=Name
-			self.myclass=None#database.__Class__
+			self.myclass=database.__class__;#__myclass__[-1]#database.__Class__
 		def __call__(self):
 			self.myclass=database.__Class__
         
@@ -115,7 +285,7 @@ class database:
 
 	class Process:
 		def __init__(self):
-			self.myclass=database.__Class__
+			self.myclass=database.__myclass__[-1]#database.__Class__
 			self.__call__()
 			pass
 		def __call__(self, *args, **kwargs):
@@ -137,7 +307,7 @@ class database:
 	class Operation:
 		__Class__=None
 		def __init__(self):
-			self.myclass=database.__Class__
+			self.myclass=database.__myclass__[-1]#database.__Class__
 			self.__call__()
 			pass
 		def __call__(self, *args, **kwargs):
@@ -149,7 +319,7 @@ class database:
 
 		class Export:
 			def __init__(self):
-				self.myclass = database.__Class__
+				self.myclass=database.__myclass__[-1]#database.__Class__
 				pass
 			def ToList(self):
 				return [self.myclass.__dict__[att].Return() for att in self.myyclass.__use_sel_att__()]
@@ -173,7 +343,7 @@ class database:
 			#print(dir(Function))
 			self.function=Function
 			self.name = Function.__name__
-			self.myclass = database.__Class__
+			self.myclass=database.__myclass__[-1]#database.__Class__
 			pass
 
 		@property
@@ -210,21 +380,13 @@ class database:
 	class Plot:
 
 		def __init__(self,x):
-			self.myclass = database.__Class__
+			self.myclass=database.__myclass__[-1]#database.__Class__
 			self.figures=[]
 			self.x=x
 			pass
 		def Vs(self,y,*args,**kwargs):
 			return plt.plot(self.myclass.__dict__[self.x].Return(),self.myclass.__dict__[y].Return*())
-
-
-
-
-
-
-
-
-
+'''
 
 def ImportFromFile(filename="19p.xlsx"):
 	from xlrd import open_workbook
@@ -235,9 +397,6 @@ def ImportFromFile(filename="19p.xlsx"):
 		rowdata.append(sheet.col_values(colx=col))
 		pass
 	return rowdata
-
-	
-	
 
 if __name__=="__main__":
 #	A=Attibute()
@@ -252,10 +411,10 @@ if __name__=="__main__":
 	def Fun(self):
 		print ("OMARI -->",dir(self))
 #	print(Fun.func_name)
-	A.Method(Fun).Add
+	A.Method.Function(Fun).Add
 	A.Fun()
-	A.Attribute("X").Add(list(range(100)))
-	A.Attribute("Y").Add(A.X.Map(lambda x:2*x+1).Return())
+	#A.Attribute("X").Add(list(range(100)))
+	#A.Attribute("Y").Add(A.X.Map(lambda x:2*x+1).Return())
 
 	#print(A.Omari.Filter(lambda x:x>5).Return())
 	#print(A.Omari.Return())
@@ -266,4 +425,4 @@ if __name__=="__main__":
 		print("Hellow Word")
 	#B.Method(Fun2).Add
 	#B.Fun2()
-	A.Fun();A.Attribute().ShortCut(globals())
+	#A.Fun();A.Attribute().ShortCut(globals())
