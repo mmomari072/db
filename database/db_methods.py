@@ -1,16 +1,14 @@
 from attribute import Attibute
 
 def addAttribute(self,Data):
-    if self.name in self.myclass.attributes:
+    if self.name in self.attribute_list:
         pass
     else:
         self.myclass.__dict__[self.name] = Attibute(self.name)
-        self.myclass.attributes.append(self.name)
-        #print(self.myclass.attributes)
-        if len(Data) != 0:
+        self.attribute_list.append(self.name)
+        if len(Data) !=0:
             self.myclass.__dict__[self.name].Import(Data)
-    return self.myclass.__dict__[self.name]
-
+        return self.myclass.__dict__[self.name]
 
 def deleteAttribute(self):
     pass
@@ -20,14 +18,16 @@ def deleteAttribute(self):
 def SelectAttributes(self,args,kwargs):
     if "Reset" in kwargs:
         if kwargs["Reset"]:
-            self.myclass.__selected__att__ = []
+            #self.myclass.__selected__att__ = []
+            pass
     Case = False
-    for att in argu:
-        if att in self.myclass.attributes:
+    print(self.attribute_list)
+    for att in args:
+        if att in self.attribute_list:
             Case = True
-            self.myclass.__selected__att__ = att
-    if len(argu) == 0 and not Case:
-        self.myclass.__selected__att__ = database.__Class__.attributes
+            self.selected_att_list += [att]
+    if len(args) == 0 and not Case:
+        self.selected_att_list = self.attributes_list
     return self.myclass
 
 
@@ -42,15 +42,15 @@ def ShortCut(self, Glob=globals(), On=True, Case=0):
         # print(globals())
         print("Case 0 is selected")
         print(self.myclass.attributes)
-        for att in self.myclass.__use_sel_att__():
+        for att in self.__use_selected_att__():
             Glob[att] = self.myclass.__dict__[att].Return()
             print(att, " Exported")
     elif Case == 1:
-        for att in self.__use_sel_att__():
+        for att in self.__use_selected_att__():
             Glob[att] = self.myclass.__dict__[att]
             pass
     else:
-        for att in self.__use_sel_att__():
+        for att in self.__use_selected_att_():
             Glob[att] = att
             pass
     pass

@@ -16,9 +16,9 @@ class Attibute:
 
     # self.Return()
     # self.Return()
-
+    #@property
     def __call__(self):
-        self.Return()
+        return self.Return()
 
     def Len(self):
         return len(self.value)
@@ -50,6 +50,10 @@ class Attibute:
     # ******************
     def Slice(self, I=[]):  # start=None,end=None,step=1):
         self.__Copy__()
+        #print(I[-1],self.value[-1])
+        #for i in I:
+        #    print(i,self.value[i])
+        #    pass
         self.value = [self.value[i] for i in I]  # self.value(I)
         return self
 
@@ -58,7 +62,7 @@ class Attibute:
         A = list(filter(Function, self.value))
         I = [];
         initial = 0
-        print(type(A))
+        #print(type(A))
         for j in range(len(A)):
             for i in range(initial, self.Len()):
                 if A[j] == self.value[i]:
